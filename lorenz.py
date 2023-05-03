@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 
+import sys
+import pytomlpp as pt
 import numpy as np
 from scipy.integrate import solve_ivp
 import matplotlib.pyplot as plt
+import pandas as pd
 
 
 def lorenz_deriv(t, q, params):
@@ -39,11 +42,25 @@ def solve_odes(t_final, q0, params):
 
     return sol
 
-q0 = np.array([1.0, 0.0, 0.0])
-params = np.array([3.0, 2.0, 1.0])
-t_final = 10.0
+# Take parameters from the input files.
+with open(sys.argv[1]) as fp:
+    input_dict = pt.load(fp)
+
+q0 = np.array([
+    input_dict["initial_conditions"]["x"], 
+    input_dict["initial_conditions"]["y"], 
+    input_dict["initial_conditions"]["z"]
+])
+params = np.array([
+    input_dict["parameters"]["sigma"], 
+    input_dict["parameters"]["r"], 
+    input_dict["parameters"]["b"]])
+t_final = input_dict["integration"]["t_final"]
+
+# Solve the ODE's.
 sol = solve_odes(t_final, q0, params)
 
-fig, ax = plt.subplots()
-ax.plot(sol.t, sol.y.T)
-plt.show()
+# Write data to file.
+df = pd.DataFrame(sol.y.T, index=sol.t, columns=["x", "y", "z"])
+df.index.name = "t"
+df.to_csv(sys.argv[2])
