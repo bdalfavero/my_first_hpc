@@ -1,0 +1,12 @@
+[initial_condition]
+x = 1.0
+y = 3.0
+z = -2.0
+
+[paramters]
+sigma = 1.0
+r = -0.5
+b = 0.0
+
+[integration]
+t_final = 10.0
