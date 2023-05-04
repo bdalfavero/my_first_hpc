@@ -42,6 +42,32 @@ def solve_odes(t_final, q0, params, **kwargs):
 
     return sol
 
+# Print a help message, if the user asks.
+if "--help" in sys.argv:
+    print(
+        """
+        lorenz.py
+
+        Simulation of a lorenz attractor.
+
+        Format for interface:
+        lorenz.py <input file> <output file>
+        The input file is a TOML file with the necessary data. 
+        See the repo for more. The ouptut file is a CSV with the solution.
+        """
+    )
+    quit()
+
+# If the user has not provided enough arguments, print a help message.
+if len(sys.argv) < 3:
+    print(
+        """
+        lorenz.py <input file> <output file>
+
+        for more help, please run "lorenz.py --help"
+        """
+    )
+    quit()
 
 # Take parameters from the input files.
 with open(sys.argv[1]) as fp:
