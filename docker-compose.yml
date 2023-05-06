@@ -1,8 +1,0 @@
-services:
-  lorenz:
-    image: lorenz
-    command: ./lorenz.py input.toml out.csv
-    volumes:
-      - type: bind
-        source: .
-        target: /lorenz
