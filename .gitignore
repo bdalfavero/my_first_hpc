@@ -1,3 +1,5 @@
 *.toml
 !input_template.toml
+*.json
+!input_template.json
 *.csv
