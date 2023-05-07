@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 
 import sys
-import pytomlpp as pt
+#import pytomlpp as pt
+import json
 import numpy as np
 from scipy.integrate import solve_ivp
 import pandas as pd
@@ -71,7 +72,7 @@ if len(sys.argv) < 3:
 
 # Take parameters from the input files.
 with open(sys.argv[1]) as fp:
-    input_dict = pt.load(fp)
+    input_dict = json.load(fp)
 
 # Extract required arguments from the input.
 q0 = np.array([
