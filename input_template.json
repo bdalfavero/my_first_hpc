@@ -10,7 +10,7 @@
 		"b": 0.0
 	},
 	"integration": {
-		"t_final": 30.0,
+		"t_final": 42.0,
 		"dense_output": true,
 		"points": 200,
 		"method": "RK45"
